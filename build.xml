@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="spring-original" basedir="." default="deploy">
+
+    <!--<property name="build.dir" value="build"/>
+    <property name="src.dir" value="src" />-->
+    <property file="build.properties" />
+
+    <path id="classpath">
+        <fileset dir="libs">
+            <include name="*.jar"/>
+        </fileset>
+        <pathelement path="build" />
+    </path>
+
+    <target name="deploy" depends="package" description="部署文件">
+
+    </target>
+    <target name="package" depends="clean,compile" description="打包项目">
+        <copy todir="build">
+            <fileset dir="src/main/resource" />
+            <fileset dir="libs" includes="*.jar" />
+        </copy>
+        <jar destfile="target/${ant.project.name}.jar" basedir="build">
+            <manifest>
+                <attribute name="Main-Class" value="com.bin.spring.Start"/>
+            </manifest>
+        </jar>
+    </target>
+    <target name="clean" depends="print-properties" description="清除已编译文件">
+        <delete dir="build" />
+        <delete dir="target" />
+        <delete dir="out" />
+    </target>
+    <target name="compile" description="编译项目">
+        <mkdir dir="build" />
+        <javac destdir="build" source="1.8" target="1.8">
+            <src path="src"/>
+            <classpath refid="classpath" />
+        </javac>
+    </target>
+    <target name="print-properties">
+        <echo>Apache Ant version is ${ant.version}</echo>
+        <echo>ant.file is ${ant.file}</echo>
+        <echo>basedir is ${basedir}</echo>
+        <echo>ant.java.version is ${ant.java.version}</echo>
+        <echo>ant.project.name is ${ant.project.name}</echo>
+        <echo>ant.project.default-target is ${ant.project.default-target}</echo>
+        <echo>ant.project.invoked-targets is ${ant.project.invoked-targets}</echo>
+        <echo>ant.core.lib is ${ant.core.lib}</echo>
+        <echo>ant.home is ${ant.home}</echo>
+        <echo>ant.library.dir is ${ant.library.dir}</echo>
+    </target>
+</project>
