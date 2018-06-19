@@ -1,28 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <project name="spring-original" basedir="." default="deploy">
 
-    <!--<property name="build.dir" value="build"/>
-    <property name="src.dir" value="src" />-->
     <property file="build.properties" />
 
     <path id="classpath">
-        <fileset dir="libs">
-            <include name="*.jar"/>
-        </fileset>
-        <pathelement path="build" />
+        <fileset dir="libs" includes="*.jar" />
     </path>
 
     <target name="deploy" depends="package" description="部署文件">
 
     </target>
     <target name="package" depends="clean,compile" description="打包项目">
-        <copy todir="build">
-            <fileset dir="src/main/resource" />
-            <fileset dir="libs" includes="*.jar" />
-        </copy>
+        <pathconvert property="mf-classpath" pathsep=" ">
+            <path refid="classpath"/>
+            <chainedmapper>
+                <flattenmapper />
+                <globmapper from="*" to="./libs/*" />
+            </chainedmapper>
+        </pathconvert>
         <jar destfile="target/${ant.project.name}.jar" basedir="build">
             <manifest>
                 <attribute name="Main-Class" value="com.bin.spring.Start"/>
+                <attribute name="Class-Path" value="./ ${mf-classpath}" />
             </manifest>
         </jar>
     </target>
@@ -37,6 +36,12 @@
             <src path="src"/>
             <classpath refid="classpath" />
         </javac>
+        <copy todir="build">
+            <fileset dir="src/main/resource" />
+        </copy>
+        <copy todir="build/libs">
+            <fileset dir="libs" includes="*.jar" />
+        </copy>
     </target>
     <target name="print-properties">
         <echo>Apache Ant version is ${ant.version}</echo>
