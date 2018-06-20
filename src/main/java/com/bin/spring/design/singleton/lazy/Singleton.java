@@ -1,4 +1,4 @@
-package com.bin.spring.singleton.lazy;
+package com.bin.spring.design.singleton.lazy;
 
 import java.util.concurrent.atomic.AtomicInteger;
 

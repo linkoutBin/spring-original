@@ -1,4 +1,4 @@
-package com.bin.spring.singleton.eager;
+package com.bin.spring.design.singleton.eager;
 
 import java.io.ObjectStreamException;
 import java.util.concurrent.atomic.AtomicInteger;

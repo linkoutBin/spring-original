@@ -1,4 +1,4 @@
-import com.bin.spring.singleton.enumeration.Singleton;
+import com.bin.spring.design.singleton.enumeration.Singleton;
 
 public class SingletonTest {
     public static void main(String[] args) {

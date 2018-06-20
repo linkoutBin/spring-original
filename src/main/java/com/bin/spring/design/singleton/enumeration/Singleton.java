@@ -1,4 +1,4 @@
-package com.bin.spring.singleton.enumeration;
+package com.bin.spring.design.singleton.enumeration;
 
 import java.util.concurrent.atomic.AtomicInteger;
 

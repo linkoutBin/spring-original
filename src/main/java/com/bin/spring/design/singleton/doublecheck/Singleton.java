@@ -1,4 +1,4 @@
-package com.bin.spring.singleton.doublecheck;
+package com.bin.spring.design.singleton.doublecheck;
 
 import java.util.concurrent.atomic.AtomicInteger;
 

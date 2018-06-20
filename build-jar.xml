@@ -8,7 +8,7 @@
     </path>
 
     <target name="deploy" depends="package" description="部署文件">
-
+        <tar destfile="target/${ant.project.name}.tar.gz" basedir="target" compression="gzip" />
     </target>
     <target name="package" depends="clean,compile" description="打包项目">
         <pathconvert property="mf-classpath" pathsep=" ">
@@ -24,9 +24,8 @@
                 <attribute name="Class-Path" value="${mf-classpath}" />
             </manifest>
         </jar>
-        <copy todir="target/libs">
-            <fileset includes="*.jar" dir="libs" />
-        </copy>
+        <copydir src="libs" dest="target/libs" />
+        <copydir src="script" dest="target" />
     </target>
     <target name="clean" depends="print-properties" description="清除已编译文件">
         <delete dir="build" />
@@ -36,7 +35,7 @@
     <target name="compile" description="编译项目">
         <mkdir dir="build" />
         <javac destdir="build" source="1.8" target="1.8">
-            <src path="src"/>
+            <src path="src/main"/>
             <classpath refid="classpath" />
         </javac>
         <copy todir="build">

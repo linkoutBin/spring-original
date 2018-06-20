@@ -1,4 +1,4 @@
-package com.bin.spring.singleton.staticinner;
+package com.bin.spring.design.singleton.staticinner;
 
 import java.util.concurrent.atomic.AtomicInteger;
 

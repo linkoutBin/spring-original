@@ -8,22 +8,17 @@
     </path>
 
     <target name="deploy" depends="package" description="部署文件">
-
+        <tar destfile="target/${ant.project.name}.tar.gz" basedir="target" compression="gzip" />
     </target>
     <target name="package" depends="clean,compile" description="打包项目">
-        <pathconvert property="mf-classpath" pathsep=" ">
-            <path refid="classpath"/>
-            <chainedmapper>
-                <flattenmapper />
-                <globmapper from="*" to="./libs/*" />
-            </chainedmapper>
-        </pathconvert>
-        <jar destfile="target/${ant.project.name}.jar" basedir="build">
+        <jar destfile="target/${ant.project.name}.jar">
+            <zipgroupfileset dir="libs" includes="*.jar" />
+            <fileset dir="build" />
             <manifest>
                 <attribute name="Main-Class" value="com.bin.spring.Start"/>
-                <attribute name="Class-Path" value="./ ${mf-classpath}" />
             </manifest>
         </jar>
+        <copydir src="script" dest="target" />
     </target>
     <target name="clean" depends="print-properties" description="清除已编译文件">
         <delete dir="build" />
@@ -33,14 +28,11 @@
     <target name="compile" description="编译项目">
         <mkdir dir="build" />
         <javac destdir="build" source="1.8" target="1.8">
-            <src path="src"/>
+            <src path="src/main"/>
             <classpath refid="classpath" />
         </javac>
         <copy todir="build">
             <fileset dir="src/main/resource" />
-        </copy>
-        <copy todir="build/libs">
-            <fileset dir="libs" includes="*.jar" />
         </copy>
     </target>
     <target name="print-properties">
