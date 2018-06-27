@@ -13,4 +13,9 @@ public class StaticProxy implements Service {
     public String showTime() {
         return service.showTime();
     }
+
+    @Override
+    public String sayHello(String name) {
+        return service.sayHello(name);
+    }
 }

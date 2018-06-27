@@ -17,10 +17,8 @@ public class ProxyTest {
     }
 
     private static void dynamicTest() {
-        Service iService = new ServiceImpl();
-        ClassLoader classLoader = iService.getClass().getClassLoader();
-        DynamicProxy dynamicProxy = new DynamicProxy(iService);
-        Service service = (Service) Proxy.newProxyInstance(classLoader,new Class[]{Service.class},dynamicProxy);
-        System.out.println(service.showTime());
+        DynamicProxy dynamicProxy = new DynamicProxy(new ServiceImpl());
+        Service result = (Service) dynamicProxy.call();
+        System.out.println(result.sayHello("zhangsan"));
     }
 }
