@@ -18,7 +18,9 @@
                 <attribute name="Main-Class" value="com.bin.spring.Start"/>
             </manifest>
         </jar>
-        <copydir src="script" dest="target" />
+        <copy todir="target" >
+            <fileset dir="script" />
+        </copy>
     </target>
     <target name="clean" depends="print-properties" description="清除已编译文件">
         <delete dir="build" />

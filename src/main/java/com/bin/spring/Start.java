@@ -1,5 +1,6 @@
 package com.bin.spring;
 
+import com.bin.spring.domain.User;
 import com.bin.spring.service.Service;
 import org.springframework.beans.BeansException;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -15,8 +16,12 @@ public class Start {
             ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
             context.start();
             log.info("spring started now!");
-            Service timeService = (Service) context.getBean("timeService");
-            log.info(timeService.showTime());
+            Service service = (Service) context.getBean("service");
+            log.info(service.showTime());
+            User user = new User();
+            user.setName("wangwu");
+            service.addByJpa(user);
+            //log.info("开始查询数据库:" + service.add(user));
         } catch (BeansException be) {
             log.info(be.getMessage());
         }

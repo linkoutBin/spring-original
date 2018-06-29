@@ -1,6 +1,7 @@
 import com.bin.spring.design.proxy.DynamicProxy;
 import com.bin.spring.design.proxy.StaticProxy;
 import com.bin.spring.service.Service;
+import com.bin.spring.service.impl.ProxyServiceImpl;
 import com.bin.spring.service.impl.ServiceImpl;
 
 import java.lang.reflect.Proxy;
@@ -12,7 +13,7 @@ public class ProxyTest {
     }
 
     private static void staticTest() {
-        StaticProxy staticProxy = new StaticProxy(new ServiceImpl());
+        StaticProxy staticProxy = new StaticProxy(new ProxyServiceImpl());
         System.out.println(staticProxy.showTime());
     }
 
