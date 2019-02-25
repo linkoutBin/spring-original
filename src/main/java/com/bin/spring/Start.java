@@ -16,6 +16,7 @@ public class Start {
             ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
             context.start();
             log.info("spring started now!");
+            log.info("system.properties:"+System.getProperties());
             Service service = (Service) context.getBean("service");
             log.info(service.showTime());
             User user = new User();
